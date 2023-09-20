@@ -1,32 +1,34 @@
 import { useState, useEffect, useRef } from "react";
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "./Context/AuthContext";
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false)
+  const { login } = useAuth()
   const [err, setErr] = useState('')
   const errRef = useRef();
   const navigate = useNavigate()
-  useEffect(() => {
-    setErr('');
-  }, [email, password]);
-  const users = [{
-    email: 'user@example.com',
-    password: '1Password'
-  }]
+  console.log(email, password, '>>>')
+  console.log(success)
 
-  const handleSignIn = (e) => {
+  useEffect(() => (
+    setErr('')
+  ), [email, password])
+
+  async function handleSignIn(e) {
     e.preventDefault()
-    const user = users.find((user) => user.email === email && user.password === password);
-    if (user) {
-      setSuccess(true);
-      navigate('/home');
-    } else {
-      setErr('Invalid Email or Password')
-    } 
-    errRef.current.focus();
+      try {
+        setErr("")
+        setSuccess(true)
+        await login(email, password)
+        navigate("/home")
+      } catch {
+        setErr("Invalid Email or Password")
+      }
+      setSuccess(false)
   }
 
   return (
