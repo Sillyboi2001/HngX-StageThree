@@ -11,8 +11,6 @@ const SignIn = () => {
   const [err, setErr] = useState('')
   const errRef = useRef();
   const navigate = useNavigate()
-  console.log(email, password, '>>>')
-  console.log(success)
 
   useEffect(() => (
     setErr('')
