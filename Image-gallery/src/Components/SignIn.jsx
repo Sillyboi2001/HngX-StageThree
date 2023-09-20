@@ -1,48 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useNavigate } from 'react-router-dom';
-import { useSignIn } from "@clerk/clerk-react";
 
-const SignInForm = () => {
+const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false)
   const [err, setErr] = useState('')
-
-  const { isLoaded, signIn, setActive } = useSignIn();
   const errRef = useRef();
   const navigate = useNavigate()
   useEffect(() => {
     setErr('');
   }, [email, password]);
+  const users = [{
+    email: 'user@example.com',
+    password: '1Password'
+  }]
 
-  if (!isLoaded) {
-    return null;
-  }
-
-  async function submit(e) {
-    e.preventDefault();
-    await signIn
-      .create({
-        identifier: email,
-        password,
-      })
-      .then((result) => {
-        if (result.status === "complete") {
-          console.log(result);
-          setActive({ session: result.createdSessionId });
-          setSuccess(true)
-          navigate('/home')
-        }
-         else {
-          console.log(result);
-        }
-      })
-      .catch((err) => console.error("error", err.errors[0].longMessage));
-  }
-
-  const loginWithGoogle = () => {
-      navigate('/home')
+  const handleSignIn = (e) => {
+    e.preventDefault()
+    const user = users.find((user) => user.email === email && user.password === password);
+    if (user) {
+      setSuccess(true);
+      navigate('/home');
+    } else {
+      setErr('Invalid Email or Password')
+    } 
+    errRef.current.focus();
   }
 
   return (
@@ -66,7 +50,7 @@ const SignInForm = () => {
     <div className="signup-form">
     <p ref={errRef} className={err ? 'errmsg' : 'offscreen'} aria-live="assertive">{err}</p>
     <h1>Sign In</h1>
-    <form onSubmit={submit}>
+    <form onSubmit={handleSignIn}>
       <input
         type="email"
         className="input-box"
@@ -88,7 +72,6 @@ const SignInForm = () => {
       <p className="or">OR</p>
       <button type="button"
        className="twitter-btn"
-       onClick={loginWithGoogle}
       >Login with Google</button>
       <p>Don&apos; t have an account?<a href="#">Sign Up</a></p>
     </form>
@@ -98,4 +81,4 @@ const SignInForm = () => {
   )
 }
   
-export default SignInForm;
+export default SignIn;

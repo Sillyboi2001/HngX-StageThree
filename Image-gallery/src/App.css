@@ -7,15 +7,18 @@ body {
 
 nav{
 	display: flex;
+  position: sticky;
+  top: 0;
 	justify-content: space-between;
   align-items: center;
 	background-color: blanchedalmond;
   width: 100%;
   height: 10vh;
+  z-index: 100;
 }
 
 .brand {
-  margin-left: 150px;
+  margin-left: 100px;
 }
 
 .brand h1 {
@@ -27,22 +30,22 @@ nav{
 }
 
 .search {
-  margin-left: 80px;
+  width: 50%;
+  margin: 80px 20px ;
 }
 
 .search input[type="text"] {
+  width: 90%;
   border: none;
   outline: none;
-  background-color: #1c8abd;
-  color: #fff;
+  background: white;
+  color: #1c8abd;
   height: 40px;
-  width: 250px;
-  border-radius: 30px;
   font-size: 18px;
   padding-left: 8px;
 }
 .search input[type="text"]::placeholder {
-  color: #fff;
+  color: #1c8abd;
 }
 
 .search-btn {
@@ -50,8 +53,6 @@ nav{
   background-color: #1c8abd;
   color: #fff;
   text-decoration: none;
-  letter-spacing: 2px;
-  border-radius: 30px;
   padding: 12px 15px;
   cursor: pointer;
 }
@@ -75,12 +76,27 @@ nav{
 .img-container {
 	width: 100%;
   height: 25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.topleft {
+  background-color: #1c8abd;
+  padding: 5px;
+  color: white;
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 18px;
+  border-radius: 3px;
 }
 
 .img {
 	height: 25rem;
+  border-radius: 6px;
   width: 100%;
   object-fit: fill;
+  box-shadow: 1px 3px 5px 2px;
 }
 
 /* Authpage section */
@@ -200,11 +216,9 @@ hr {
   .search input[type="text"] {
     height: 45px;
     width: 250px;
-    border-radius: 20px;
     font-size: 15px;
   }
   .search-btn {
-    border-radius: 20px;
     padding: 12px;
   }
 }
@@ -214,10 +228,8 @@ hr {
     height: 40px;
     width: 250px;
     font-size: 15px;
-    border-radius: 20px;
   }
   .search-btn {
-    border-radius: 20px;
     padding: 8px 10px;
     font-size: 16px;
   }
@@ -228,10 +240,8 @@ hr {
     height: 35px;
     width: 200px;
     font-size: 13px;
-    border-radius: 18px;
   }
   .search-btn {
-    border-radius: 18px;
     padding: 8px 8px;
     font-size: 14px;
   }
@@ -242,10 +252,8 @@ hr {
     height: 30px;
     width: 150px;
     font-size: 11px;
-    border-radius: 16px;
   }
   .search-btn {
-    border-radius: 16px;
     padding: 4px 4px;
     font-size: 12px;
   }
@@ -262,10 +270,8 @@ hr {
     height: 25px;
     width: 130px;
     font-size: 11px;
-    border-radius: 12px;
   }
   .search-btn {
-    border-radius: 16px;
     padding: 2px 2px;
     font-size: 15px;
   }
