@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import NavBar from "./Navbar";
 import ClipLoader from "react-spinners/ClipLoader";
-import { API_KEY } from "../../Api/ApiKeys";
 
 const Home = () => {
   const [images, setImages] = useState([]);
@@ -16,7 +15,7 @@ const Home = () => {
     try {
       const response = await axios.get(`https://api.pexels.com/v1/curated?page=2&per_page=40`, {
         headers: {
-          Authorization: API_KEY
+          Authorization: import.meta.env.VITE_API_KEY
         }
       })
       console.log(response.data)
@@ -54,7 +53,7 @@ const Home = () => {
     try {
       const response = await axios.get(`https://api.pexels.com/v1/search?query=${searchTerm}&per_page=40`, {
         headers: {
-          Authorization: API_KEY
+          Authorization: import.meta.env.VITE_API_KEY
         }
       });
       setSearchImages(response.data.photos);
@@ -95,6 +94,7 @@ const Home = () => {
               <img src={image.src.medium}
                 className="img"
                 alt={image.alt} />
+                <div className="topleft">{image.photographer}</div>
             </div>
           </div>
         ))}
