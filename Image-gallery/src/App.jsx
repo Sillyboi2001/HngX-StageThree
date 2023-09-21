@@ -1,6 +1,6 @@
 import SignIn from './Components/SignIn'
 import './App.css';
-import { AuthProvider } from './Components/Context/AuthContext';
+import { AuthProvider } from './Components/Connext/AuthContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './Components/PrivateRoute';
  

@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { FiSearch } from 'react-icons/fi';
 import { FiLogOut } from 'react-icons/fi';
-import { useAuth } from "./Context/AuthContext";
+import { useAuth } from "./Connext/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const NavBar = ({ onSearch }) => {
-  const [search, setSearch] = useState('')
+const NavBar = ({ setSearchImages }) => {
   const { logOut } = useAuth()
   const navigate = useNavigate()
-
-  const handleSearch = () => {
-    onSearch(search);
-  };
 
   const logout = async () => {
     try {
@@ -30,14 +25,12 @@ const NavBar = ({ onSearch }) => {
       <div className="search">
           <input 
             type="text" 
-            placeholder="Search for free photos" 
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search with tags" 
+            onChange={(e) => setSearchImages(e.target.value)}
           />
           <button 
             type="button" 
             className="search-btn"
-            onClick={handleSearch}
           >
             <FiSearch />
           </button>

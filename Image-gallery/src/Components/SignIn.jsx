@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from "./Context/AuthContext";
+import { useAuth } from "./Connext/AuthContext";
 
 const SignIn = () => {
   const [email, setEmail] = useState('');

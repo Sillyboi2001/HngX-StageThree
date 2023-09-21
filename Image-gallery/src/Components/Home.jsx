@@ -5,8 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const Home = () => {
   const [images, setImages] = useState([]);
-  const [searchImages, setSearchImages] = useState([])
-  const [showResult, setShowResult] = useState(false)
+  const [searchImages, setSearchImages] = useState('')
   const [loading, setLoading] = useState(true)
   const dragItem = useRef(null)
   const dragOverItem = useRef(null)
@@ -33,7 +32,7 @@ const Home = () => {
   }, []);
 
   const sortDraggedImage = () => {
-    let _images = [ ...(showResult ? searchImages : images) ]
+    let _images = [ ...images ]
     //remove and save the dragged image
     const draggedImage = _images.splice(dragItem.current, 1)[0]
     //switch image position
@@ -42,32 +41,15 @@ const Home = () => {
     dragItem.current = null;
     dragOverItem.current = null;
     //Update the images based on whether it's search results or default images
-    if (showResult) {
-      setSearchImages(_images)
-    } else {
-      setImages(_images)
-    }
+    setImages(_images)
   }
 
-  const handleSearch = async (searchTerm) => {
-    try {
-      const response = await axios.get(`https://api.pexels.com/v1/search?query=${searchTerm}&per_page=40`, {
-        headers: {
-          Authorization: import.meta.env.VITE_API_KEY
-        }
-      });
-      setSearchImages(response.data.photos);
-      setShowResult(true);
-      setLoading(false)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+
 
   return (
     <>
-    <NavBar 
-      onSearch={handleSearch}
+    <NavBar
+      setSearchImages={setSearchImages}
     />
     {loading ? 
       <div className='loaded-center'> 
@@ -80,7 +62,9 @@ const Home = () => {
       />
       </div> :
         <div className="container" >
-        {(showResult ? searchImages : images)
+        {images
+        .filter(image => 
+          image.photographer.toLowerCase().indexOf(searchImages.toLowerCase()) !== -1)
         .map((image, index) => (
           <div
             className="card"
@@ -89,6 +73,7 @@ const Home = () => {
             onDragStart={() => dragItem.current = index}
             onDragEnter={() => dragOverItem.current = index}
             onDragEnd={sortDraggedImage}
+            onDragOver={(e) => e.preventDefault()}
           >
             <div className="img-container">
               <img src={image.src.medium}
@@ -98,7 +83,8 @@ const Home = () => {
             </div>
           </div>
         ))}
-      </div>}
+      </div>
+    }
     </>
   )
 }

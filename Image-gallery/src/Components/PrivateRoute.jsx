@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAuth } from './Context/AuthContext';
+import { useAuth } from './Connext/AuthContext';
 import Home from "./Home";
 
 const PrivateRoute = () => {
