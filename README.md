@@ -45,3 +45,7 @@ Here is link to my repository: https://github.com/Sillyboi2001/HngX-StageThree.g
 To get access to this repository, move to "HngX-StageThree" repository, and then either use [ssh] or [https] to clone onto your local machine. To clone checkout this documentation on github (https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) You can view this project with you browser.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# Accessing the website
+
+>Login with these credentials: email: user@example.com, password: 1Password
